@@ -8,9 +8,6 @@
     <title>Random Quote Generator</title>
     <script src="quotes.js"></script>
     <script>
-      //we need to create an array of objects that contain a quote and author
-      //then we need to randomly display the quote and author
-      //1) create array of objects with keys author and quote
 
       window.onload = init;
       function init() {
@@ -18,33 +15,29 @@
       }
 
       function generateQuote(){
-        //2) randomly generate a number between 0 and length of quote array
+        // randomly generate a number between 0 and length of quote array
         let randomIndex = Math.floor(Math.random()*QUOTEBANK.length);
 
-        //3) the rand num will be used to index quotes/authors and display
+        // the random number will be used to index quotes/authors and display
         let randomQuote = QUOTEBANK[randomIndex].quote;
         let randomAuthor = QUOTEBANK[randomIndex].author;
 
-        //3.5) set up twitter link
-        // base URL
-        let exampleTwitterLink = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=%22Ask%20and%20it%20will%20be%20given%20to%20you%3B%20search%2C%20and%20you%20will%20find%3B%20knock%20and%20the%20door%20will%20be%20opened%20for%20you.%22%20Jesus"
+        // set up twitter link
         let twitterLink = "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=";
 
-        // quote and author
+        // quote and author regex to format as URL
         let quoteInApiForm = randomQuote.replace(/\s/g, "%20");
         let authorInApiForm = randomAuthor.replace(/\s/g, "%20");
         quoteInApiForm = quoteInApiForm.replace(/,/g, "%2C");
 
+        // concatonate base twitter link with formatted quote and author
         twitterLink += quoteInApiForm + " -" + authorInApiForm;
-        //4)set element text values
+
+        // set element text values
         document.getElementById("tweet-quote").href = twitterLink;
         document.getElementById("text").innerText = randomQuote;
         document.getElementById("author").innerText = randomAuthor;
-
-        console.log(QUOTEBANK);
-
       }
-
     </script>
 
   </head>
@@ -54,6 +47,7 @@
         <div class="col-md-8 offset-md-2">
           <wrapper id="quote-box" class="center">
             <div class="card">
+              <div style="text-align:center" class="card-header">Random Quote Machine</div>
               <div class="card-body">
                 <h5 class="card-title"><div id="text"></div></h5>
                 <p class="card-text"><div id="author"></div></p>
